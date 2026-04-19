@@ -57,4 +57,13 @@ def update_user(id, apellido, direccion):
     conn.close()
     return{"mensaje": "Usuario actualizado correctamente"}
 
+def delete_user(id):
+    conn = database.connection_db()
+    cursor = conn.cursor()
+    sql_delete = "DELETE FROM users WHERE id = %s"
+    cursor.execute(sql_delete, (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return{"mensaje": "Usuario eliminado correctamente"}
 
