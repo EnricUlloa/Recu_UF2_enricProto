@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Form
-from services.user import create_table, fill_user, obtain_user
+from services.user import create_table, fill_user, obtain_user, update_user
 
 app = FastAPI()
 
@@ -23,4 +23,9 @@ async def rellenar(
 @app.get("/formulario/usuario/{id}", response_model=dict)
 async def obtener(id: int):
     result = obtain_user(id)
+    return result
+
+@app.put("/formulario/usuario/{id}", response_model=dict)
+async def actualizar(id: int, apellido: str, direccion: str):
+    result = update_user(id, apellido, direccion)
     return result
